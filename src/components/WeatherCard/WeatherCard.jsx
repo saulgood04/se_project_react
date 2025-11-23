@@ -1,4 +1,4 @@
-import "./WeatherCard.css"
+import "./WeatherCard.css";
 import sunny from "../../assets/sunny.png";
 
 function WeatherCard() {
