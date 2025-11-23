@@ -2,6 +2,34 @@
   border-radius: 12px;
   overflow: hidden;
   position: relative;
+  width: 323px;
+  display: flex;
+  justify-content: center;
+}
+
+.card__name {
+  position: absolute;
+  top: 15px;
+  margin: 0;
+  font-family: Cabinet Grotesk;
+font-weight: 700;
+font-style: Bold;
+font-size: 16px;
+line-height: 20px;
+letter-spacing: 0%;
+background-color: white;
+border-radius: 4px;
+padding-top: 2px;
+padding-right: 12px;
+padding-bottom: 2px;
+padding-left: 12px;
+
+
+
+}
+
+.card__image {
+  width: 100%;
 }
 
 .card img {
@@ -18,8 +46,8 @@
   height: 24px;
   width: 53px;
   top: 10px;
-left: 50%;
-transform: translateX(-50%);
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 1;
   border-radius: 4px;
   padding-top: 2px;
