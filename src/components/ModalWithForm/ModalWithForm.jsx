@@ -16,7 +16,7 @@ function ModalWithForm({
           type="button"
           className="modal__close"
         >
-          CLOSE
+          <img src="../src/assets/union.png" alt="Close" />
         </button>
         <form className="modal__form">
           {children}
