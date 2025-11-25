@@ -1,0 +1,45 @@
+.modal__image {
+  width: 100%;
+  height: 498px;
+  opacity: 1;
+  display: block;
+  margin: 0 auto;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.modal__content_type_image {
+  padding: 0;
+  border-radius: 16px;
+}
+
+.modal__content {
+  background-color: #fff;
+  position: relative;
+  padding: 28px 28px 36px;
+  max-width: 496px;
+  box-sizing: border-box;
+  width: 100%;
+  border-radius: 16px;
+}
+
+.modal__caption {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.modal__weather {
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  letter-spacing: 0%;
+}
+
+.modal__close {
+  border: none;
+  background-color: transparent;
+}

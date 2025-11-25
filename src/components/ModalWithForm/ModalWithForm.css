@@ -17,11 +17,6 @@
 
 .modal__title {
   margin: 0;
-  width: 95;
-  height: 20;
-  top: 221px;
-  left: 500px;
-  opacity: 1;
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
@@ -50,11 +45,6 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  width: 42;
-  height: 20;
-  top: 265px;
-  left: 500px;
-  opacity: 1;
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
