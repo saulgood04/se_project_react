@@ -1,5 +1,3 @@
-@font-face {
-  font-family: 'Cabinet Grotesk';
-  src: url('./assets/fonts/CabinetGrotesk-Regular.woff2') format('woff2');
-}
+@import "./vendor/fonts/fonts.css";
+
 @import url(./vendor/normalize.css);
