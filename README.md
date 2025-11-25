@@ -36,6 +36,6 @@ Design Elements:
 
 ## Deployment Link
 
-[Live demo]
+[Live demo] https://github.com/saulgood04/se_project_react
 
 
