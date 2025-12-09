@@ -34,7 +34,7 @@
   font-weight: 700;
   font-style: Bold;
   font-size: 14px;
-  color: #fff;
+  
 }
 
 .toggle-switch__text_C {
@@ -43,9 +43,13 @@
   font-weight: 700;
   font-style: Bold;
   font-size: 14px;
-  color: #000 50%;
+  color: #000;
 }
 
 .toggle-switch__checkbox:checked ~ .toggle-switch__circle {
   left: 28px;
+}
+
+.toggle-switch__text_color_white {
+    color: white;
 }
