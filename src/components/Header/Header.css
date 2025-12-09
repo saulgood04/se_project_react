@@ -25,6 +25,9 @@
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0%;
+  outline: none;
+  border: none;
+  background: none;
 }
 
 .header__user-container {
@@ -40,4 +43,15 @@
   font-size: 20px;
   line-height: 100%;
   letter-spacing: 0%;
+}
+
+.header__controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__add-clothes-btn {
+  margin: 0; 
 }
