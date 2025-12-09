@@ -1,7 +1,7 @@
 import "./ModalWithForm.css";
 import closeIcon from "../../assets/Union.png";
 
-function ModalWithForm({ children, buttonText, title, name, isOpen, onClose }) {
+function ModalWithForm({ buttonText, title, name, isOpen, onClose, children }) {
   return (
     <div className={`modal modal_type_${name} ${isOpen ? "modal_opened" : ""}`}>
       <div className="modal__content">

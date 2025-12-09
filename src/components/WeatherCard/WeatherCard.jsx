@@ -8,8 +8,7 @@ function WeatherCard({ weatherData }) {
   return (
     <section className="weather-card">
       <p className="weather-card__temp">
-        {weatherData.temp[currentTemperatureUnit]} °{" "}
-        {currentTemperatureUnit}
+        {weatherData.temp[currentTemperatureUnit]} ° {currentTemperatureUnit}
       </p>
       <img src={sunny} alt="sunny" className="weather-card__image" />
     </section>
