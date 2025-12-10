@@ -101,6 +101,60 @@
       "name": "T-Shirt",
       "weather": "hot",
       "imageUrl": "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/wtwr-project/T-Shirt.png?etag=44ed1963c44ab19cd2f5011522c5fc09"
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "http://fake.png",
+      "weather": "cold",
+      "_id": 17
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "http://fake.png",
+      "weather": "cold",
+      "_id": 18
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 19
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 20
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 21
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 22
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 23
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 24
+    },
+    {
+      "name": "adfads",
+      "imageUrl": "https://cdn.pixabay.com/photo/2024/05/26/10/15/bird-8788491_1280.jpg",
+      "weather": "cold",
+      "_id": 25
     }
   ]
 }

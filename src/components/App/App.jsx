@@ -14,7 +14,7 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { getItems } from "../../utils/api";
+import { getItems, addItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -47,8 +47,13 @@ function App() {
       imageUrl: inputValues.imageUrl,
       weather: inputValues.weather,
     };
-    setClothingItems([...clothingItems, newCardData]);
-    closeActiveModal();
+
+    addItem(newCardData)
+      .then((data) => {
+        setClothingItems([data, ...clothingItems ]);
+        closeActiveModal();
+      })
+      .catch(console.error);
   };
 
   const closeActiveModal = () => {
@@ -65,10 +70,22 @@ function App() {
 
     getItems()
       .then((data) => {
+        //TODO make new itmes appear first
+        
         setClothingItems(data);
       })
       .catch(console.error);
   }, []);
+
+  //TODO
+  //- Add delete button to the preview modal
+  //- Declare a handler in App.jsx )deleteItemHandler)
+  //- pass handlker to preview modal
+  //- Inside preview modal, pass the ID as an argument to the handler (use handler partner foumd in ItemCArd
+  // Inside the handler
+  //-call removeItem function, pass it the ID
+  //- in the .then() remove the itemfrom the array
+  // - how? filter
 
   return (
     <CurrentTemperatureUnitContext.Provider
