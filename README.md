@@ -42,7 +42,7 @@ Design Elements:
 
 ## Project Pitch Video
 
-Check out [this video](https://drive.google.com/file/d/1e4zA6gwvSPwyeXrLVj9JsUcHMNOgWuih/view?usp=sharing), where I describe my 
+Check out [this video](https://drive.google.com/file/d/1Anzw3V95YLfC-Y4fVy2moNKdZvXQEpM_/view?usp=sharing), where I describe my 
  project and some challenges I faced while building it.
 
 
