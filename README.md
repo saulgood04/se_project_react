@@ -1,4 +1,4 @@
-# Project 10: WTWR
+# Project 11: WTWR
 
 ## Overview
 
@@ -11,6 +11,8 @@ Key features include:
 - Filtering clothing items by weather type (hot, warm, cold)
 - BEM methodology for organized and maintainable code structure
 - Two interactive modals, Add Clothes and Item Modal
+- React & Vite framework
+- React Router
 
 
 The project was designed in Figma and implemented using modern CSS techniques including Flexbox and Grid layouts, demonstrating the journey from design to deployment.

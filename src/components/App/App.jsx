@@ -14,7 +14,7 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { getItems, addItem } from "../../utils/api";
+import { getItems, addItem, removeItem } from "../../utils/api";
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -50,11 +50,20 @@ function App() {
 
     addItem(newCardData)
       .then((data) => {
-        setClothingItems([data, ...clothingItems ]);
+        setClothingItems([data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
   };
+
+  const onDeleteItem = (id) => {
+  removeItem(id)
+    .then(() => {
+      setClothingItems(clothingItems.filter(item => item._id !== id));
+      closeActiveModal();
+    })
+    .catch(console.error);
+};
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -70,22 +79,11 @@ function App() {
 
     getItems()
       .then((data) => {
-        //TODO make new itmes appear first
-        
-        setClothingItems(data);
+                const sortedData = data.sort((a, b) => b._id - a._id);
+        setClothingItems(sortedData);
       })
       .catch(console.error);
   }, []);
-
-  //TODO
-  //- Add delete button to the preview modal
-  //- Declare a handler in App.jsx )deleteItemHandler)
-  //- pass handlker to preview modal
-  //- Inside preview modal, pass the ID as an argument to the handler (use handler partner foumd in ItemCArd
-  // Inside the handler
-  //-call removeItem function, pass it the ID
-  //- in the .then() remove the itemfrom the array
-  // - how? filter
 
   return (
     <CurrentTemperatureUnitContext.Provider
@@ -128,6 +126,7 @@ function App() {
           isOpen={activeModal === "preview"}
           card={selectedCard}
           onClose={closeActiveModal}
+          onDeleteItem={onDeleteItem}
         />
       </div>
     </CurrentTemperatureUnitContext.Provider>

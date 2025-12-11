@@ -43,3 +43,26 @@
   border: none;
   background-color: transparent;
 }
+
+.modal__delete-button {
+  background-color: transparent;
+  border: none;
+  color: #ff4d4d;
+  cursor: pointer;
+  font-family: Cabinet Grotesk;
+  font-weight: 700;
+  font-size: 16px;
+  align-self: flex-start;
+}
+
+.modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal__caption-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
