@@ -40,4 +40,9 @@ Design Elements:
 
 [Live demo] https://github.com/saulgood04/se_project_react
 
+## Project Pitch Video
+
+Check out [this video](https://drive.google.com/file/d/1e4zA6gwvSPwyeXrLVj9JsUcHMNOgWuih/view?usp=sharing), where I describe my 
+ project and some challenges I faced while building it.
+
 
