@@ -57,13 +57,13 @@ function App() {
   };
 
   const onDeleteItem = (id) => {
-  removeItem(id)
-    .then(() => {
-      setClothingItems(clothingItems.filter(item => item._id !== id));
-      closeActiveModal();
-    })
-    .catch(console.error);
-};
+    removeItem(id)
+      .then(() => {
+        setClothingItems(clothingItems.filter((item) => item._id !== id));
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
 
   const closeActiveModal = () => {
     setActiveModal("");
@@ -79,7 +79,7 @@ function App() {
 
     getItems()
       .then((data) => {
-                const sortedData = data.sort((a, b) => b._id - a._id);
+        const sortedData = data.sort((a, b) => b._id - a._id);
         setClothingItems(sortedData);
       })
       .catch(console.error);
@@ -109,6 +109,7 @@ function App() {
                 <Profile
                   onCardClick={handleCardClick}
                   clothingItems={clothingItems}
+                  handleAddClick={handleAddClick}
                 />
               }
             />
