@@ -10,6 +10,7 @@ export default function Profile({
   onCardClick,
   handleAddClick,
   onEditProfileClick,
+  onCardLike,
 }) {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
@@ -22,13 +23,13 @@ export default function Profile({
   };
 
   const handleProfileSubmit = async (userData) => {
-try {
- await updateUserProfile(userData);
- setIsEditProfileModalOpen(false);
-} catch (error) {
- console.error("Error updating profile:", error);
-}
-};
+    try {
+      await updateUserProfile(userData);
+      setIsEditProfileModalOpen(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
 
   return (
     <section className="profile">
@@ -37,6 +38,7 @@ try {
         onCardClick={onCardClick}
         clothingItems={clothingItems}
         handleAddClick={handleAddClick}
+        onCardLike={onCardLike}
       />
       <EditProfileModal
         isOpen={isEditProfileModalOpen}

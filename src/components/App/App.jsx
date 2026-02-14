@@ -10,7 +10,7 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { getItems } from "../../utils/api";
+import { getItems, addCardLike, removeCardLike } from "../../utils/api";
 import { addItem, deleteItem } from "../../utils/auth";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import {
@@ -121,6 +121,28 @@ function App() {
       .catch(console.error);
   };
 
+  const handleCardLike = ({ id, isLiked }) => {
+    const token = localStorage.getItem("jwt");
+    // Check if this card is not currently liked
+    !isLiked
+      ? // if so, send a request to add the user's id to the card's likes array
+        addCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err))
+      : // if not, send a request to remove the user's id from the card's likes array
+        removeCardLike(id, token)
+          .then((updatedCard) => {
+            setClothingItems((cards) =>
+              cards.map((item) => (item._id === id ? updatedCard : item)),
+            );
+          })
+          .catch((err) => console.log(err));
+  };
+
   const closeActiveModal = () => {
     setActiveModal("");
   };
@@ -175,6 +197,7 @@ function App() {
                     weatherData={weatherData}
                     handleCardClick={handleCardClick}
                     clothingItems={clothingItems}
+                    onCardLike={handleCardLike}
                   />
                 }
               />
@@ -188,6 +211,7 @@ function App() {
                     )}
                     handleAddClick={handleAddClick}
                     onEditProfileClick={handleEditProfileClick}
+                    onCardLike={handleCardLike}
                   />
                 }
               />

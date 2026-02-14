@@ -43,3 +43,45 @@ export const updateUserProfile = (userData) => {
     }),
   }).then(handleServerResponse);
 };
+
+export const addCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
+};
+
+export const removeCardLike = (id, token) => {
+  return fetch(`${baseUrl}/items/${id}/likes`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      authorization: `Bearer ${token}`,
+    },
+  }).then(handleServerResponse);
+};
+
+
+
+export const register = ({ name, avatar, email, password }) => {
+  return fetch(`${baseUrl}/signup`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name, avatar, email, password }),
+  }).then(handleServerResponse);
+};
+
+export const authorize = ({ email, password }) => {
+  return fetch(`${baseUrl}/signin`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ email, password }),
+  }).then(handleServerResponse);
+};
