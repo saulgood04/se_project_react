@@ -11,6 +11,7 @@ export default function Profile({
   handleAddClick,
   onEditProfileClick,
   onCardLike,
+  onSignOut,
 }) {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
 
@@ -33,7 +34,7 @@ export default function Profile({
 
   return (
     <section className="profile">
-      <SideBar onEditProfileClick={handleEditProfileClick} />
+      <SideBar onEditProfileClick={handleEditProfileClick} onSignOut={onSignOut} />
       <ClothesSection
         onCardClick={onCardClick}
         clothingItems={clothingItems}

@@ -94,6 +94,12 @@ function App() {
       .catch(console.error);
   };
 
+  const handleSignOut = () => {
+  localStorage.removeItem("jwt");
+  setIsLoggedIn(false);
+  setCurrentUser(null);
+};
+
   const onAddItem = (inputValues) => {
     const newCardData = {
       _id: Date.now(),
@@ -212,6 +218,7 @@ function App() {
                     handleAddClick={handleAddClick}
                     onEditProfileClick={handleEditProfileClick}
                     onCardLike={handleCardLike}
+                    onSignOut={handleSignOut}
                   />
                 }
               />
