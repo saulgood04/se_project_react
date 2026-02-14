@@ -13,7 +13,12 @@ import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnit
 import { getItems } from "../../utils/api";
 import { addItem, deleteItem } from "../../utils/auth";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import { register, authorize, checkToken } from "../../utils/auth";
+import {
+  register,
+  authorize,
+  checkToken,
+  updateProfile,
+} from "../../utils/auth";
 import LoginModal from "../LoginModal/LoginModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -47,6 +52,10 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleEditProfileClick = () => {
+    setActiveModal("edit-profile");
+  };
+
   const handleRegistration = (inputValues) => {
     register(inputValues)
       .then((data) => {
@@ -70,6 +79,16 @@ function App() {
       .then((data) => {
         localStorage.setItem("jwt", data.token);
         console.log("User logged in:", data);
+        closeActiveModal();
+      })
+      .catch(console.error);
+  };
+
+  const handleEditProfile = (inputValues) => {
+    const token = localStorage.getItem("jwt");
+    updateProfile(inputValues, token)
+      .then((updatedUser) => {
+        setCurrentUser(updatedUser);
         closeActiveModal();
       })
       .catch(console.error);
@@ -168,6 +187,7 @@ function App() {
                       (item) => item.owner === currentUser?._id,
                     )}
                     handleAddClick={handleAddClick}
+                    onEditProfileClick={handleEditProfileClick}
                   />
                 }
               />

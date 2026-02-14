@@ -5,27 +5,41 @@ const headers = {
 };
 
 const handleServerResponse = (res) => {
-    return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
-}
+  return res.ok ? res.json() : Promise.reject(`Error: ${res.status}`);
+};
 
-export const getItems = () => 
+export const getItems = () =>
   fetch(`${baseUrl}/items`, { headers }).then(handleServerResponse);
 
 export const addItem = ({ name, imageUrl, weather }) => {
-    return fetch(`${baseUrl}/items`, {
-        method: "POST", 
-        headers,
-        body: JSON.stringify({
-            name,
-            imageUrl,
-            weather,
-        }),
-    }).then(handleServerResponse);
-}
+  return fetch(`${baseUrl}/items`, {
+    method: "POST",
+    headers,
+    body: JSON.stringify({
+      name,
+      imageUrl,
+      weather,
+    }),
+  }).then(handleServerResponse);
+};
 
 export const removeItem = (itemID) => {
-    return fetch(`${baseUrl}/items/${itemID}`,{
-        method: "DELETE",
-        headers,
-    }).then(handleServerResponse);
-}
+  return fetch(`${baseUrl}/items/${itemID}`, {
+    method: "DELETE",
+    headers,
+  }).then(handleServerResponse);
+};
+
+export const updateUserProfile = (userData) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      ...headers,
+      authorization: `Bearer ${localStorage.getItem("jwt")}`,
+    },
+    body: JSON.stringify({
+      name: userData.name,
+      avatar: userData.avatar,
+    }),
+  }).then(handleServerResponse);
+};
