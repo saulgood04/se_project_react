@@ -95,10 +95,10 @@ function App() {
   };
 
   const handleSignOut = () => {
-  localStorage.removeItem("jwt");
-  setIsLoggedIn(false);
-  setCurrentUser(null);
-};
+    localStorage.removeItem("jwt");
+    setIsLoggedIn(false);
+    setCurrentUser(null);
+  };
 
   const onAddItem = (inputValues) => {
     const newCardData = {
@@ -219,6 +219,7 @@ function App() {
                     onEditProfileClick={handleEditProfileClick}
                     onCardLike={handleCardLike}
                     onSignOut={handleSignOut}
+                    onUpdateUser={handleEditProfile}
                   />
                 }
               />

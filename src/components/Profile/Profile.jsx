@@ -1,4 +1,6 @@
 import { useState } from "react";
+import { useContext } from "react";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
@@ -12,8 +14,10 @@ export default function Profile({
   onEditProfileClick,
   onCardLike,
   onSignOut,
+  onUpdateUser,
 }) {
   const [isEditProfileModalOpen, setIsEditProfileModalOpen] = useState(false);
+  const currentUser = useContext(CurrentUserContext);
 
   const handleEditProfileClick = () => {
     setIsEditProfileModalOpen(true);
@@ -24,13 +28,14 @@ export default function Profile({
   };
 
   const handleProfileSubmit = async (userData) => {
-    try {
-      await updateUserProfile(userData);
-      setIsEditProfileModalOpen(false);
-    } catch (error) {
-      console.error("Error updating profile:", error);
-    }
-  };
+try {
+ const updatedUser = await updateUserProfile(userData);
+ onUpdateUser(updatedUser); // Update the context
+ setIsEditProfileModalOpen(false);
+} catch (error) {
+ console.error("Error updating profile:", error);
+}
+};
 
   return (
     <section className="profile">
@@ -45,10 +50,7 @@ export default function Profile({
         isOpen={isEditProfileModalOpen}
         onClose={handleCloseModal}
         onSubmit={handleProfileSubmit}
-        currentUser={{
-          name: "Actual User Name",
-          avatar: "https://example.com/user-avatar.jpg",
-        }}
+        currentUser={currentUser}
       />
     </section>
   );
