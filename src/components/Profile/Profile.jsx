@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { useContext } from "react";
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
+import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import { updateUserProfile } from "../../utils/api";
+import { updateProfile } from "../../utils/api";
 
 export default function Profile({
   clothingItems,
@@ -28,18 +28,24 @@ export default function Profile({
   };
 
   const handleProfileSubmit = async (userData) => {
-try {
- const updatedUser = await updateUserProfile(userData);
- onUpdateUser(updatedUser); // Update the context
- setIsEditProfileModalOpen(false);
-} catch (error) {
- console.error("Error updating profile:", error);
-}
-};
+    try {
+      const updatedUser = await updateProfile(
+        userData,
+        localStorage.getItem("jwt"),
+      );
+      onUpdateUser(updatedUser);
+      setIsEditProfileModalOpen(false);
+    } catch (error) {
+      console.error("Error updating profile:", error);
+    }
+  };
 
   return (
     <section className="profile">
-      <SideBar onEditProfileClick={handleEditProfileClick} onSignOut={onSignOut} />
+      <SideBar
+        onEditProfileClick={handleEditProfileClick}
+        onSignOut={onSignOut}
+      />
       <ClothesSection
         onCardClick={onCardClick}
         clothingItems={clothingItems}

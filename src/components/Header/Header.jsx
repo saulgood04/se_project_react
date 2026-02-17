@@ -24,7 +24,7 @@ function Header({
         <img src={logo} alt="WTWR logo" />
       </NavLink>
       <p className="header__date-and-location">
-        {currentDate}, {weatherData.city}
+        {currentDate}, {weatherData?.city}
       </p>
       <div className="header__controls">
         <ToggleSwitch />

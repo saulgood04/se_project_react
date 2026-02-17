@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { coordinates, apiKey } from "../../utils/constants";
 import Header from "../Header/Header";
@@ -10,15 +10,20 @@ import Profile from "../Profile/Profile";
 import { getWeather, filterWeatherData } from "../../utils/weatherApi";
 import Footer from "../Footer/Footer";
 import CurrentTemperatureUnitContext from "../../contexts/CurrentTemperatureUnitContext";
-import { getItems, addCardLike, removeCardLike } from "../../utils/api";
-import { addItem, deleteItem } from "../../utils/auth";
+import {
+  getItems,
+  addItem,
+  removeItem,
+  addCardLike,
+  removeCardLike,
+} from "../../utils/api";
 import RegisterModal from "../RegisterModal/RegisterModal";
 import {
   register,
   authorize,
   checkToken,
   updateProfile,
-} from "../../utils/auth";
+} from "../../utils/api";
 import LoginModal from "../LoginModal/LoginModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 
@@ -66,9 +71,14 @@ function App() {
         });
       })
       .then((data) => {
-        // Handle successful login here (you'll expand this later)
         localStorage.setItem("jwt", data.token);
-        console.log("User registered and logged in:", data);
+        // Add these lines to immediately check the token and set user state
+        return checkToken(data.token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        console.log("User registered and logged in:", userData);
         closeActiveModal();
       })
       .catch(console.error);
@@ -78,7 +88,13 @@ function App() {
     authorize(inputValues)
       .then((data) => {
         localStorage.setItem("jwt", data.token);
-        console.log("User logged in:", data);
+        // Add these lines to immediately check the token and set user state
+        return checkToken(data.token);
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        console.log("User logged in:", userData);
         closeActiveModal();
       })
       .catch(console.error);
@@ -101,10 +117,22 @@ function App() {
   };
 
   const onAddItem = (inputValues) => {
+    // Validate the image URL before adding
+    let validImageUrl = inputValues.imageUrl;
+
+    if (
+      !validImageUrl ||
+      validImageUrl === "fake.png" ||
+      validImageUrl.includes("fake.png") ||
+      (!validImageUrl.startsWith("http://") &&
+        !validImageUrl.startsWith("https://"))
+    ) {
+      validImageUrl = ""; // Set to empty string for invalid URLs
+    }
+
     const newCardData = {
-      _id: Date.now(),
       name: inputValues.name,
-      imageUrl: inputValues.imageUrl,
+      imageUrl: validImageUrl,
       weather: inputValues.weather,
     };
 
@@ -119,7 +147,7 @@ function App() {
 
   const onDeleteItem = (id) => {
     const token = localStorage.getItem("jwt");
-    deleteItem(id, token)
+    removeItem(id, token)
       .then(() => {
         setClothingItems(clothingItems.filter((item) => item._id !== id));
         closeActiveModal();
@@ -163,7 +191,16 @@ function App() {
 
     getItems()
       .then((data) => {
-        const sortedData = data.sort((a, b) => b._id - a._id);
+        // Filter out items with invalid URLs
+        const validItems = (data.data || data).filter(
+          (item) =>
+            item.imageUrl &&
+            item.imageUrl !== "fake.png" &&
+            !item.imageUrl.includes("fake.png") &&
+            (item.imageUrl.startsWith("http://") ||
+              item.imageUrl.startsWith("https://")),
+        );
+        const sortedData = validItems.sort((a, b) => b._id - a._id);
         setClothingItems(sortedData);
       })
       .catch(console.error);
@@ -183,6 +220,8 @@ function App() {
         });
     }
   }, []);
+
+  console.log("App component rendered");
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -219,7 +258,7 @@ function App() {
                     onEditProfileClick={handleEditProfileClick}
                     onCardLike={handleCardLike}
                     onSignOut={handleSignOut}
-                    onUpdateUser={handleEditProfile}
+                    onUpdateUser={setCurrentUser}
                   />
                 }
               />

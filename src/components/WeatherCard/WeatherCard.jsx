@@ -6,9 +6,9 @@ import { useContext } from "react";
 
 function WeatherCard({ weatherData, onCardLike, clothingItems }) {
   const { currentTemperatureUnit } = useContext(CurrentTemperatureUnitContext);
-  const filteredItems = clothingItems.filter(
-    (item) => item.weather === weatherData.type,
-  );
+  const filteredItems = clothingItems?.filter(
+  (item) => item.weather === weatherData.type,
+) || [];
   return (
     <section className="weather-card">
       <p className="weather-card__temp">
