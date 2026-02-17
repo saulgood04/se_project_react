@@ -9,11 +9,13 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   };
 
   const handleLike = () => {
-    const isLiked = item.likes && item.likes.some((id) => id === currentUser?._id);
+    const isLiked =
+      item.likes && item.likes.some((id) => id === currentUser?._id);
     onCardLike({ id: item._id, isLiked: isLiked });
   };
 
-  const isLiked = item.likes && item.likes.some((id) => id === currentUser?._id);
+  const isLiked =
+    item.likes && item.likes.some((id) => id === currentUser?._id);
   return (
     <li className="card">
       <h2 className="card__name">{item.name}</h2>
@@ -23,16 +25,15 @@ function ItemCard({ item, onCardClick, onCardLike }) {
         src={item.imageUrl || item.link}
         alt={item.name}
       />
-      <button 
-        className={`card__like-button ${isLiked ? "card__like-button_active" : ""}`}
-        onClick={handleLike}
-      >
-        ♥
-      </button>
+      {currentUser && (
+        <button
+          className={`card__like-button ${isLiked ? "card__like-button_active" : ""}`}
+          onClick={handleLike}
+        >
+          ♥
+        </button>
+      )}
     </li>
   );
 }
 export default ItemCard;
-
-
-

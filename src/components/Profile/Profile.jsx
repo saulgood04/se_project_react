@@ -5,13 +5,11 @@ import "./Profile.css";
 import ClothesSection from "../ClothesSection/ClothesSection";
 import SideBar from "../SideBar/SideBar";
 import EditProfileModal from "../EditProfileModal/EditProfileModal";
-import { updateProfile } from "../../utils/api";
 
 export default function Profile({
   clothingItems,
   onCardClick,
   handleAddClick,
-  onEditProfileClick,
   onCardLike,
   onSignOut,
   onUpdateUser,
@@ -29,11 +27,7 @@ export default function Profile({
 
   const handleProfileSubmit = async (userData) => {
     try {
-      const updatedUser = await updateProfile(
-        userData,
-        localStorage.getItem("jwt"),
-      );
-      onUpdateUser(updatedUser);
+      onUpdateUser(userData);
       setIsEditProfileModalOpen(false);
     } catch (error) {
       console.error("Error updating profile:", error);

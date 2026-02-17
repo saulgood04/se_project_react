@@ -37,47 +37,6 @@ export const checkToken = (token) => {
   }).then(checkResponse);
 };
 
-export const addItem = (item, token) => {
-  return fetch(`${baseUrl}/items`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-    body: JSON.stringify(item),
-  }).then(checkResponse);
-};
-
-export const deleteItem = (id, token) => {
-  return fetch(`${baseUrl}/items/${id}`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
-
-export const addCardLike = (id, token) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
-
-export const removeCardLike = (id, token) => {
-  return fetch(`${baseUrl}/items/${id}/likes`, {
-    method: "DELETE",
-    headers: {
-      "Content-Type": "application/json",
-      authorization: `Bearer ${token}`,
-    },
-  }).then(checkResponse);
-};
-
 export const updateProfile = (updates, token) => {
   return fetch(`${baseUrl}/users/me`, {
     method: "PATCH",

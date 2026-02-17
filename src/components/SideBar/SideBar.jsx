@@ -1,9 +1,8 @@
 import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./SideBar.css";
-import avatar from "../../assets/avatar.png";
 
-export default function SideBar({ onSignOut }) {
+export default function SideBar({ onSignOut, onEditProfileClick }) {
   const currentUser = useContext(CurrentUserContext);
   return (
     <aside className="sidebar">
@@ -15,6 +14,9 @@ export default function SideBar({ onSignOut }) {
           className="sidebar__avatar"
         />
       </div>
+      <button className="sidebar__edit-profile" onClick={onEditProfileClick}>
+        Edit profile
+      </button>
       <button className="sidebar__sign-out" onClick={onSignOut}>
         Sign Out
       </button>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import "./App.css";
 import { coordinates, apiKey } from "../../utils/constants";
 import Header from "../Header/Header";
@@ -23,9 +23,14 @@ import {
   authorize,
   checkToken,
   updateProfile,
-} from "../../utils/api";
+} from "../../utils/auth";
 import LoginModal from "../LoginModal/LoginModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
+import { Navigate } from "react-router-dom";
+
+const ProtectedRoute = ({ isLoggedIn, children }) => {
+  return isLoggedIn ? children : <Navigate to="/" />;
+};
 
 function App() {
   const [weatherData, setWeatherData] = useState({
@@ -39,6 +44,7 @@ function App() {
   const [currentTemperatureUnit, setCurrentTemperatureUnit] = useState("F");
   const [currentUser, setCurrentUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggleSwitchChange = () => {
     setCurrentTemperatureUnit(currentTemperatureUnit === "F" ? "C" : "F");
@@ -55,10 +61,6 @@ function App() {
 
   const handleRegisterClick = () => {
     setActiveModal("register");
-  };
-
-  const handleEditProfileClick = () => {
-    setActiveModal("edit-profile");
   };
 
   const handleRegistration = (inputValues) => {
@@ -85,17 +87,18 @@ function App() {
   };
 
   const handleLogin = (inputValues) => {
+    if (!inputValues.email || !inputValues.password) {
+      return;
+    }
     authorize(inputValues)
-      .then((data) => {
-        localStorage.setItem("jwt", data.token);
-        // Add these lines to immediately check the token and set user state
-        return checkToken(data.token);
-      })
-      .then((userData) => {
-        setCurrentUser(userData);
-        setIsLoggedIn(true);
-        console.log("User logged in:", userData);
-        closeActiveModal();
+      .then((res) => {
+        if (res.token) {
+          localStorage.setItem("jwt", res.token);
+          setCurrentUser(res.user);
+          setIsLoggedIn(true);
+          navigate("/"); // Add this line
+          closeActiveModal();
+        }
       })
       .catch(console.error);
   };
@@ -114,6 +117,7 @@ function App() {
     localStorage.removeItem("jwt");
     setIsLoggedIn(false);
     setCurrentUser(null);
+    navigate("/", { replace: true });
   };
 
   const onAddItem = (inputValues) => {
@@ -233,6 +237,8 @@ function App() {
             <Header
               onRegisterClick={handleRegisterClick}
               onLoginClick={() => setActiveModal("login")}
+              handleAddClick={handleAddClick}
+              weatherData={weatherData}
             />
             <Routes>
               <Route
@@ -249,17 +255,18 @@ function App() {
               <Route
                 path="/profile"
                 element={
-                  <Profile
-                    onCardClick={handleCardClick}
-                    clothingItems={clothingItems.filter(
-                      (item) => item.owner === currentUser?._id,
-                    )}
-                    handleAddClick={handleAddClick}
-                    onEditProfileClick={handleEditProfileClick}
-                    onCardLike={handleCardLike}
-                    onSignOut={handleSignOut}
-                    onUpdateUser={setCurrentUser}
-                  />
+                  <ProtectedRoute isLoggedIn={isLoggedIn}>
+                    <Profile
+                      onCardClick={handleCardClick}
+                      clothingItems={clothingItems.filter(
+                        (item) => item.owner === currentUser?._id,
+                      )}
+                      handleAddClick={handleAddClick}
+                      onCardLike={handleCardLike}
+                      onSignOut={handleSignOut}
+                      onUpdateUser={setCurrentUser}
+                    />
+                  </ProtectedRoute>
                 }
               />
             </Routes>

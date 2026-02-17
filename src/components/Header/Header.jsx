@@ -2,7 +2,6 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./Header.css";
 import logo from "../../assets/logo.svg";
-import avatar from "../../assets/avatar.png";
 import ToggleSwitch from "../ToggleSwitch/ToggleSwitch";
 import { NavLink } from "react-router-dom";
 
@@ -19,7 +18,6 @@ function Header({
   const currentUser = useContext(CurrentUserContext);
   return (
     <header className="header">
-      {/* Todo - link to home page */}
       <NavLink to="/" className="header__logo">
         <img src={logo} alt="WTWR logo" />
       </NavLink>
@@ -28,13 +26,15 @@ function Header({
       </p>
       <div className="header__controls">
         <ToggleSwitch />
-        <button
-          onClick={handleAddClick}
-          type="button"
-          className="header__add-clothes-btn"
-        >
-          + Add Clothes
-        </button>
+        {currentUser && (
+          <button
+            onClick={handleAddClick}
+            type="button"
+            className="header__add-clothes-btn"
+          >
+            + Add Clothes
+          </button>
+        )}
       </div>
       {currentUser ? (
         <NavLink className="header__nav-link" to="/profile">
