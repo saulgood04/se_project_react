@@ -8,7 +8,8 @@ function ItemCard({ item, onCardClick, onCardLike }) {
     onCardClick(item);
   };
 
-  const handleLike = () => {
+  const handleLike = (event) => {
+    event.stopPropagation();
     const isLiked =
       item.likes && item.likes.some((id) => id === currentUser?._id);
     onCardLike({ id: item._id, isLiked: isLiked });
@@ -17,10 +18,9 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   const isLiked =
     item.likes && item.likes.some((id) => id === currentUser?._id);
   return (
-    <li className="card">
+    <li className="card" onClick={handleCardClick}>
       <h2 className="card__name">{item.name}</h2>
       <img
-        onClick={handleCardClick}
         className="card__image"
         src={item.imageUrl || item.link}
         alt={item.name}
