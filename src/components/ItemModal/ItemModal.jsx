@@ -12,16 +12,8 @@ function ItemModal({ isOpen, onClose, card, onDeleteItem }) {
         <button onClick={onClose} type="button" className="modal__close">
           <img src={closeIcon} alt="Close" />
         </button>
-        <img
-          src={
-            card?.imageUrl &&
-            card.imageUrl !== "fake.png" &&
-            !card.imageUrl.includes("fake.png") &&
-            (card.imageUrl.startsWith("http://") ||
-              card.imageUrl.startsWith("https://"))
-              ? card.imageUrl
-              : ""
-          }
+        <img  
+          src={card?.imageUrl || card?.link}
           alt={card?.name}
           className="modal__image"
           onError={(e) => {
@@ -29,6 +21,7 @@ function ItemModal({ isOpen, onClose, card, onDeleteItem }) {
             e.target.style.display = "none";
           }}
         />
+          
         <div className="modal__footer">
           <div className="modal__caption-container">
             <h2 className="modal__caption">{card?.name}</h2>

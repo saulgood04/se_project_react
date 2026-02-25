@@ -56,4 +56,13 @@ export const removeCardLike = (id, token) => {
   }).then(handleServerResponse);
 };
 
-
+export const updateProfile = (userData, token) => {
+  return fetch(`${baseUrl}/users/me`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify(userData),
+  }).then(handleServerResponse);
+};

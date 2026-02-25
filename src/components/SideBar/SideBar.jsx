@@ -14,12 +14,13 @@ export default function SideBar({ onSignOut, onEditProfileClick }) {
           className="sidebar__avatar"
         />
       </div>
-      <button className="sidebar__edit-profile" onClick={onEditProfileClick}>
-        Edit profile
-      </button>
-      <button className="sidebar__sign-out" onClick={onSignOut}>
-        Sign Out
-      </button>
+   <div className="sidebar__buttons">
+  <button className="sidebar__edit-profile" onClick={onEditProfileClick}>
+    Change profile data
+  </button>
+  <button className="sidebar__sign-out" onClick={onSignOut}>
+    Log Out
+  </button>
+</div>
     </aside>
-  );
-}
+  );}

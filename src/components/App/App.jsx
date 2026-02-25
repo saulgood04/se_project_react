@@ -16,14 +16,10 @@ import {
   removeItem,
   addCardLike,
   removeCardLike,
+  updateProfile,
 } from "../../utils/api";
 import RegisterModal from "../RegisterModal/RegisterModal";
-import {
-  register,
-  authorize,
-  checkToken,
-  updateProfile,
-} from "../../utils/auth";
+import { register, authorize, checkToken } from "../../utils/auth";
 import LoginModal from "../LoginModal/LoginModal";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import { Navigate } from "react-router-dom";
@@ -51,6 +47,7 @@ function App() {
   };
 
   const handleCardClick = (card) => {
+    console.log("Selected card:", card);
     setActiveModal("preview");
     setSelectedCard(card);
   };
@@ -65,8 +62,7 @@ function App() {
 
   const handleRegistration = (inputValues) => {
     register(inputValues)
-      .then((data) => {
-        // After successful registration, sign the user in
+      .then(() => {
         return authorize({
           email: inputValues.email,
           password: inputValues.password,
@@ -94,11 +90,14 @@ function App() {
       .then((res) => {
         if (res.token) {
           localStorage.setItem("jwt", res.token);
-          setCurrentUser(res.user);
-          setIsLoggedIn(true);
-          navigate("/"); // Add this line
-          closeActiveModal();
+          return checkToken(res.token);
         }
+      })
+      .then((userData) => {
+        setCurrentUser(userData);
+        setIsLoggedIn(true);
+        navigate("/");
+        closeActiveModal();
       })
       .catch(console.error);
   };
@@ -120,30 +119,11 @@ function App() {
     navigate("/", { replace: true });
   };
 
-  const onAddItem = (inputValues) => {
-    // Validate the image URL before adding
-    let validImageUrl = inputValues.imageUrl;
-
-    if (
-      !validImageUrl ||
-      validImageUrl === "fake.png" ||
-      validImageUrl.includes("fake.png") ||
-      (!validImageUrl.startsWith("http://") &&
-        !validImageUrl.startsWith("https://"))
-    ) {
-      validImageUrl = ""; // Set to empty string for invalid URLs
-    }
-
-    const newCardData = {
-      name: inputValues.name,
-      imageUrl: validImageUrl,
-      weather: inputValues.weather,
-    };
-
+  const handleAddItem = (item) => {
     const token = localStorage.getItem("jwt");
-    addItem(newCardData, token)
-      .then((data) => {
-        setClothingItems([data, ...clothingItems]);
+    addItem(item, token)
+      .then((newItem) => {
+        setClothingItems([newItem, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
@@ -161,18 +141,16 @@ function App() {
 
   const handleCardLike = ({ id, isLiked }) => {
     const token = localStorage.getItem("jwt");
-    // Check if this card is not currently liked
+
     !isLiked
-      ? // if so, send a request to add the user's id to the card's likes array
-        addCardLike(id, token)
+      ? addCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item)),
             );
           })
           .catch((err) => console.log(err))
-      : // if not, send a request to remove the user's id from the card's likes array
-        removeCardLike(id, token)
+      : removeCardLike(id, token)
           .then((updatedCard) => {
             setClothingItems((cards) =>
               cards.map((item) => (item._id === id ? updatedCard : item)),
@@ -195,7 +173,6 @@ function App() {
 
     getItems()
       .then((data) => {
-        // Filter out items with invalid URLs
         const validItems = (data.data || data).filter(
           (item) =>
             item.imageUrl &&
@@ -264,7 +241,7 @@ function App() {
                       handleAddClick={handleAddClick}
                       onCardLike={handleCardLike}
                       onSignOut={handleSignOut}
-                      onUpdateUser={setCurrentUser}
+                      onUpdateUser={handleEditProfile}
                     />
                   </ProtectedRoute>
                 }
@@ -289,7 +266,7 @@ function App() {
           <AddItemModal
             isOpen={activeModal === "add-garment"}
             onClose={closeActiveModal}
-            onAddItem={onAddItem}
+            onAddItem={handleAddItem}
           />
           <ItemModal
             isOpen={activeModal === "preview"}
