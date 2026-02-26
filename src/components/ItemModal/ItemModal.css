@@ -63,6 +63,16 @@
 
 .modal__caption-container {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal__like-button {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.modal__like-button_active {
+  opacity: 1;
 }

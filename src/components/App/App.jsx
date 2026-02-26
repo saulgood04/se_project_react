@@ -120,10 +120,11 @@ function App() {
   };
 
   const handleAddItem = (item) => {
+    console.log("Item being sent to API:", item);
     const token = localStorage.getItem("jwt");
     addItem(item, token)
       .then((newItem) => {
-        setClothingItems([newItem, ...clothingItems]);
+        setClothingItems([newItem.data, ...clothingItems]);
         closeActiveModal();
       })
       .catch(console.error);
@@ -145,16 +146,26 @@ function App() {
     !isLiked
       ? addCardLike(id, token)
           .then((updatedCard) => {
+            console.log("API response:", updatedCard);
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
+              cards.map((item) => (item._id === id ? updatedCard.data : item)),
             );
+            if (selectedCard._id === id) {
+              setSelectedCard(updatedCard.data);
+            }
+            console.log("Item liked successfully");
           })
           .catch((err) => console.log(err))
       : removeCardLike(id, token)
           .then((updatedCard) => {
+            console.log("API response:", updatedCard);
             setClothingItems((cards) =>
-              cards.map((item) => (item._id === id ? updatedCard : item)),
+              cards.map((item) => (item._id === id ? updatedCard.data : item)),
             );
+            if (selectedCard._id === id) {
+              setSelectedCard(updatedCard.data);
+            }
+            console.log("Item unliked successfully");
           })
           .catch((err) => console.log(err));
   };
@@ -269,10 +280,12 @@ function App() {
             onAddItem={handleAddItem}
           />
           <ItemModal
+            key={selectedCard._id}
             isOpen={activeModal === "preview"}
             card={selectedCard}
             onClose={closeActiveModal}
             onDeleteItem={onDeleteItem}
+            onCardLike={handleCardLike}
           />
         </div>
       </CurrentTemperatureUnitContext.Provider>
