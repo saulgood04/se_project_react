@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
+import "./EditProfileModal.css";
 
 function EditProfileModal({ isOpen, onClose, onSubmit, currentUser }) {
   const [name, setName] = useState("");
@@ -21,10 +22,11 @@ function EditProfileModal({ isOpen, onClose, onSubmit, currentUser }) {
     <ModalWithForm
       isOpen={isOpen}
       onClose={onClose}
-      title="Edit Profile"
+      title="Change profile data"
       buttonText="Save Changes"
       onSubmit={handleSubmit}
     >
+      <label className="modal__label">Name *</label>
       <input
         type="text"
         className="modal__input"
@@ -32,6 +34,7 @@ function EditProfileModal({ isOpen, onClose, onSubmit, currentUser }) {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
+      <label className="modal__label">Avatar *</label>
       <input
         type="url"
         className="modal__input"

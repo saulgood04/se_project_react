@@ -70,7 +70,7 @@ function App() {
       })
       .then((data) => {
         localStorage.setItem("jwt", data.token);
-        // Add these lines to immediately check the token and set user state
+        
         return checkToken(data.token);
       })
       .then((userData) => {
