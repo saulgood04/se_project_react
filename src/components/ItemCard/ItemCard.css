@@ -44,7 +44,3 @@
   cursor: pointer;
   flex-shrink: 0;
 }
-
-.card__like-button_active {
-  filter: brightness(0);
-}

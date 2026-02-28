@@ -2,6 +2,7 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import "./ItemCard.css";
 import likeButton from "../../assets/likeButton.png";
+import likeButtonBlack from "../../assets/likeButtonBlack.png";
 
 function ItemCard({ item, onCardClick, onCardLike }) {
   const currentUser = useContext(CurrentUserContext);
@@ -10,18 +11,15 @@ function ItemCard({ item, onCardClick, onCardLike }) {
   };
 
   const handleLike = (event) => {
-    console.log("ItemCard like button clicked!"); // ADD THIS
-    console.log("Item data:", item); // ADD THIS
-    console.log("Current user:", currentUser); // ADD THIS
     event.stopPropagation();
     const isLiked =
       item.likes && item.likes.some((id) => id === currentUser?._id);
-    console.log("Is liked:", isLiked); // ADD THIS
-    onCardLike({ id: item._id, isLiked: !isLiked });
+    onCardLike({ id: item._id, isLiked: isLiked });
   };
 
   const isLiked =
     item.likes && item.likes.some((id) => id === currentUser?._id);
+  console.log("Button isLiked state:", isLiked);
   return (
     <li className="card" onClick={handleCardClick}>
       <div className="card__header">
@@ -31,7 +29,11 @@ function ItemCard({ item, onCardClick, onCardLike }) {
             className={`card__like-button ${isLiked ? "card__like-button_active" : ""}`}
             onClick={handleLike}
           >
-            <img src={likeButton} alt="Like" className="card__like-icon" />
+            <img
+              src={isLiked ? likeButtonBlack : likeButton}
+              alt="Like"
+              className="card__like-icon"
+            />
           </button>
         )}
       </div>
