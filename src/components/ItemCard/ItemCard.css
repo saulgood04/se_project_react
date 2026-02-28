@@ -3,14 +3,23 @@
   overflow: hidden;
   position: relative;
   width: 323px;
-
+  max-height: 326px;
   display: flex;
   justify-content: center;
 }
 
-.card__name {
+.card__header {
   position: absolute;
   top: 15px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.card__name {
   margin: 0;
   font-family: Cabinet Grotesk;
   font-weight: 700;
@@ -20,10 +29,8 @@
   letter-spacing: 0%;
   background-color: white;
   border-radius: 4px;
-  padding-top: 2px;
-  padding-right: 12px;
-  padding-bottom: 2px;
-  padding-left: 12px;
+  padding: 2px 12px;
+  flex-shrink: 0;
 }
 
 .card__image {
@@ -32,13 +39,10 @@
 }
 
 .card__like-button {
-  position: absolute;
-  top: 15px;
-  right: 100px;
   border: none;
-  background: none;
-  background-color: transparent;
+  background: transparent;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .card__like-button_active {

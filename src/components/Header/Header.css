@@ -9,7 +9,7 @@
 }
 
 .header__logo {
-  margin-right: 24px;
+  margin-right: 60px;
 }
 
 .header__date-and-location {
@@ -21,7 +21,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  letter-spacing: 0%;
+  
 }
 
 .header__add-clothes-btn {
@@ -59,6 +59,7 @@
 
 .header__controls {
   margin-left: auto;
+  margin-right: 130px; 
   display: flex;
   align-items: center;
   gap: 20px;
@@ -84,6 +85,7 @@
 
 .header__register-btn {
   border: none;
+  background: transparent;
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-style: Bold;
@@ -94,6 +96,7 @@
 
 .header__login-btn {
   border: none;
+  background: transparent;
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
