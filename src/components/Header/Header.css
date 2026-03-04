@@ -1,11 +1,24 @@
 .header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 32px 0 28px;
   font-family:
     Cabinet Grotesk,
     Arial,
     sans-serif;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 
 .header__logo {
@@ -21,7 +34,6 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 24px;
-  
 }
 
 .header__add-clothes-btn {
@@ -58,8 +70,6 @@
 }
 
 .header__controls {
-  margin-left: auto;
-  margin-right: 130px; 
   display: flex;
   align-items: center;
   gap: 20px;
