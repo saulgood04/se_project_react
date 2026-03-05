@@ -5,22 +5,12 @@
   display: block;
   margin: 0 auto;
   object-fit: cover;
-  border-radius: 16px;
+  border-radius: 16px 16px 0 0;
 }
 
 .modal__content_type_image {
-  padding: 0;
-  border-radius: 16px;
-}
-
-.modal__content {
-  background-color: #fff;
+  padding: 0 0 20px 0;
   position: relative;
-  padding: 28px 28px 36px;
-  max-width: 496px;
-  box-sizing: border-box;
-  width: 100%;
-  border-radius: 16px;
 }
 
 .modal__caption {
@@ -30,7 +20,11 @@
   line-height: 24px;
   letter-spacing: 0%;
   flex: 1;
-  margin-right: 270px;
+  width: 36;
+  height: 24;
+  top: 624px;
+  left: 503px;
+  margin-left: 24px;
 }
 
 .modal__weather {
@@ -39,14 +33,23 @@
   font-size: 20px;
   line-height: 24px;
   letter-spacing: 0%;
+  width: 115;
+  height: 24;
+  top: 660px;
+  left: 503px;
+  margin-left: 24px;
 }
 
 .modal__close {
   border: none;
   background-color: transparent;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 1;
 }
 
-.modal__delete-button {
+.modal__delete-btn {
   background-color: transparent;
   border: none;
   color: #ff4d4d;
@@ -54,13 +57,15 @@
   font-family: Cabinet Grotesk;
   font-weight: 700;
   font-size: 16px;
-  margin-left: auto;
+  margin-right: 24px;
 }
 
 .modal__footer {
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  border-radius: 0 0 16px 16px;
 }
 
 .modal__caption-container {

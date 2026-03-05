@@ -12,7 +12,7 @@ function ItemModal({ isOpen, onClose, card, onDeleteItem, onCardLike }) {
   return (
     <div className={`modal ${isOpen ? "modal_opened" : ""}`} onClick={onClose}>
       <div
-        className="modal__content modal__content_type_image"
+        className="modal__content_type_image"
         onClick={(e) => e.stopPropagation()}
       >
         <button onClick={onClose} type="button" className="modal__close">
@@ -25,15 +25,18 @@ function ItemModal({ isOpen, onClose, card, onDeleteItem, onCardLike }) {
         />
 
         <div className="modal__footer">
-          <div className="modal__caption-container">
-            <div className="modal__caption-row">
-              <h2 className="modal__caption">{card?.name}</h2>
-              <button className="modal__delete-button" type="button">
+          <div className="modal__caption-row">
+            <h2 className="modal__caption">{card?.name}</h2>
+            {isOwn && (
+              <button
+                onClick={() => onDeleteItem(card)}
+                className="modal__delete-btn"
+              >
                 Delete item
               </button>
-            </div>
-            <p className="modal__weather">Weather: {card?.weather}</p>
+            )}
           </div>
+          <p className="modal__weather">Weather: {card?.weather}</p>
         </div>
       </div>
     </div>
