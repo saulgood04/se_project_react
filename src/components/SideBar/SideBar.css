@@ -18,12 +18,10 @@
 }
 
 .sidebar__avatar {
-  margin-left: 12px;
-  flex: 0 0 40px;
-  height: 56px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   object-fit: cover;
-  display: block;
 }
 
 .sidebar__avatar_none {
