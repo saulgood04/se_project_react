@@ -1,19 +1,22 @@
 .cards__list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 323px);
   margin: 0;
   padding: 0;
   list-style-type: none;
-  gap: 21px;
+  gap: 20px;
 }
 
 .cards__text {
-  font-family: Cabinet Grotesk, Arial, sans-serif;
+  font-family:
+    Cabinet Grotesk,
+    Arial,
+    sans-serif;
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
-  width: 330;
-  height: 25;
+  width: 330px;
+  height: 25px;
   top: 220px;
   left: 40px;
   opacity: 1;
