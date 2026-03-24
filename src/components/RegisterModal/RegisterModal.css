@@ -1,0 +1,17 @@
+.modal__submit {
+  width: 86px;
+  height: 36px;
+  gap: 8px;
+  border-radius: 4px;
+}
+
+.modal__button-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal__secondary {
+  margin-top: -1px;
+}

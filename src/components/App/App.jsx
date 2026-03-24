@@ -60,6 +60,10 @@ function App() {
     setActiveModal("register");
   };
 
+  const handleLoginClick = () => {
+  setActiveModal("login");
+};
+  
   const handleRegistration = (inputValues) => {
     register(inputValues)
       .then(() => {
@@ -263,6 +267,7 @@ function App() {
               isOpen={activeModal === "register"}
               onClose={closeActiveModal}
               onRegister={handleRegistration}
+              onSwitchToLogin={handleLoginClick}
             />
 
             <LoginModal
