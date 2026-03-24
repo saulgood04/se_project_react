@@ -284,7 +284,7 @@ function App() {
             isOpen={activeModal === "preview"}
             card={selectedCard}
             onClose={closeActiveModal}
-            onDeleteItem={onDeleteItem}
+            onDeleteItem={() => onDeleteItem(selectedCard._id)}
             onCardLike={handleCardLike}
           />
         </div>
