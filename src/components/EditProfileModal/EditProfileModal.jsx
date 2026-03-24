@@ -16,7 +16,7 @@ function EditProfileModal({ isOpen, onClose, onSubmit, currentUser }) {
         avatar: currentUser?.avatar || "",
       });
     }
-  }, [isOpen, currentUser]);
+  }, [isOpen, currentUser, setValues]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

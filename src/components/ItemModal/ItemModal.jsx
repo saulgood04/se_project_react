@@ -3,7 +3,7 @@ import { useContext } from "react";
 import CurrentUserContext from "../../contexts/CurrentUserContext";
 import closeIcon from "../../assets/Group 119.png";
 
-function ItemModal({ isOpen, onClose, card, onDeleteItem, onCardLike }) {
+function ItemModal({ isOpen, onClose, card, onDeleteItem }) {
   const currentUser = useContext(CurrentUserContext);
   console.log("Card data in ItemModal:", card);
   console.log("Image URL being used:", card.imageUrl);

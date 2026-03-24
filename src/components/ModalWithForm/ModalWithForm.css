@@ -93,7 +93,8 @@
 }
 
 .modal__submit {
-  width: 124px;
+  width: 86px;
+  box-sizing: border-box;
   height: 36px;
   opacity: 1;
   border-radius: 4px;
