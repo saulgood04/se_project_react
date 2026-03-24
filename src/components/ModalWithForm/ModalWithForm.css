@@ -112,3 +112,17 @@
   background: #0000004d;
   border: none;
 }
+
+.modal__secondary {
+  background: transparent;
+  border: none;
+  color: #000;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  text-decoration: underline;
+}
+
+.modal__secondary:hover {
+  opacity: 0.7;
+}

@@ -70,7 +70,7 @@ function App() {
       })
       .then((data) => {
         localStorage.setItem("jwt", data.token);
-        
+
         return checkToken(data.token);
       })
       .then((userData) => {
@@ -269,6 +269,7 @@ function App() {
               isOpen={activeModal === "login"}
               onClose={closeActiveModal}
               onLogin={handleLogin}
+              onSwitchToRegister={handleRegisterClick}
             />
 
             <Footer />
