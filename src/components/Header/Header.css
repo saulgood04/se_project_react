@@ -93,7 +93,10 @@
 .header__register-btn {
   border: none;
   background: transparent;
-  font-family: Cabinet Grotesk;
+  font-family:
+    Cabinet Grotesk,
+    Arial,
+    sans-serif;
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
@@ -104,6 +107,10 @@
 .header__login-btn {
   border: none;
   background: transparent;
+  font-family:
+    Cabinet Grotesk,
+    Arial,
+    sans-serif;
   font-weight: 700;
   font-style: Bold;
   font-size: 20px;
